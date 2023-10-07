@@ -8,55 +8,55 @@
 import SwiftUI
 
 struct ContentView: View {
-
-    @State private var isTapped = false
-
+    @State private var isAnimating = true
+    private let size: CGFloat = 50
+    
     var body: some View {
         Button {
-            withAnimation(.interpolatingSpring) {
-                isTapped.toggle()
-                
+            isAnimating = true
+            withAnimation(.interpolatingSpring(stiffness: 100, damping: 10)) {
+                isAnimating.toggle()
             }
         } label: {
-            HStack(spacing: 0) {
-                Image(systemName: "play.fill")
-                    .resizable()
-                    .frame(
-                        width: isTapped ? 50 : 0,
-                        height: isTapped ? 50 : 0
-                    )
-                    .opacity(isTapped ? 1 : 0)
+            ZStack {
+                Circle()
+                    .foregroundStyle(.purple.opacity(0.4))
+                    .frame(width: size * 2)
+                    .opacity(isAnimating ? 0.5 : 0)
                 
+                HStack() {
+                    Image(systemName: "play.fill")
+                        .foregroundStyle(.purple)
+                        .font(.system(size: size))
+                        .scaleEffect(
+                            x: isAnimating ? 0 : 1,
+                            y: isAnimating ? 0 : 1,
+                            anchor: .trailing
+                        )
+                        .offset(x: isAnimating ? size * -1 : size * -0.35)
+                        .opacity(isAnimating ? 0 : 1)
+                }
                 
-                Image(systemName: "play.fill")
-                    .resizable()
-                    .frame(
-                        width: 50,
-                        height: 50
-                    )
-                
-                Image(systemName: "play.fill")
-                    .resizable()
-                    .frame(
-                        width: isTapped ? 0 : 50,
-                        height: isTapped ? 0 : 50
-                    )
-                    .opacity(isTapped ? 0 : 1)
-   
+                HStack(spacing: size * -0.13) {
+                    Image(systemName: "play.fill")
+                        .foregroundStyle(.purple)
+                        .font(.system(size: size))
+                        .offset(x: isAnimating ? 0 : size * 0.75 )
+                    
+                    Image(systemName: "play.fill")
+                        .foregroundStyle(.purple)
+                        .font(.system(size: size))
+                        .opacity(isAnimating ? 1 : 0)
+                        .scaleEffect(isAnimating ? 1 : 0)
+                        .offset(x: isAnimating ? 0 : size * 0.5)
+                }
             }
         }
-        .frame(width: 100, height: 50)
-//        .background(Circle().fill(isAnimated ? Color.clear : Color.gray))
-//        .animation(.easeInOut(duration: 0.2))
-//        .scaleEffect(isAnimated ? 1.2 : 1.0)
-//        .simultaneousGesture(TapGesture().onEnded { _ in
-//            withAnimation {
-//                isAnimated.toggle()
-//            }
-//            
-//        })
     }
 }
+
+    
+
 
 #Preview {
     ContentView()
