@@ -24,18 +24,16 @@ struct ContentView: View {
                     .frame(width: size * 2)
                     .opacity(isAnimating ? 0.5 : 0)
                 
-                HStack() {
-                    Image(systemName: "play.fill")
-                        .foregroundStyle(.purple)
-                        .font(.system(size: size))
-                        .scaleEffect(
-                            x: isAnimating ? 0 : 1,
-                            y: isAnimating ? 0 : 1,
-                            anchor: .trailing
-                        )
-                        .offset(x: isAnimating ? size * -1 : size * -0.35)
-                        .opacity(isAnimating ? 0 : 1)
-                }
+                Image(systemName: "play.fill")
+                    .foregroundStyle(.purple)
+                    .font(.system(size: size))
+                    .scaleEffect(
+                        x: isAnimating ? 0 : 1,
+                        y: isAnimating ? 0 : 1,
+                        anchor: .trailing
+                    )
+                    .offset(x: isAnimating ? size * -1 : size * -0.35)
+                    .opacity(isAnimating ? 0 : 1)
                 
                 HStack(spacing: size * -0.1) {
                     Image(systemName: "play.fill")
