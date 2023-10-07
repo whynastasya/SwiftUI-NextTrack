@@ -37,7 +37,7 @@ struct ContentView: View {
                         .opacity(isAnimating ? 0 : 1)
                 }
                 
-                HStack(spacing: size * -0.13) {
+                HStack(spacing: size * -0.1) {
                     Image(systemName: "play.fill")
                         .foregroundStyle(.purple)
                         .font(.system(size: size))
